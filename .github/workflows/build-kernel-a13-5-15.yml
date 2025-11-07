@@ -1,8 +1,8 @@
 name: 编译内核a13-5-15
 
 permissions:
-  contents: write      # Allow writing to repository contents (for pushing tags)
-  actions: write       # Allows triggering actions
+  contents: write
+  actions: write
 
 on:
   workflow_dispatch:
@@ -50,6 +50,11 @@ on:
         required: true
         type: boolean
         default: true
+      BBG:
+        description: "是否启用BBG"
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   build-kernel-a13-5-15:
@@ -62,6 +67,7 @@ jobs:
       version: ${{ inputs.version }}
       use_zram: ${{ inputs.use_zram }}
       use_kpm: ${{ inputs.use_kpm }}
+      BBG: ${{ inputs.BBG }}
 
   get-ksu-manager:
     if: ${{ inputs.get_manager }}
